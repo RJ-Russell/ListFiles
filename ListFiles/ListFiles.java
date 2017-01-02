@@ -1,5 +1,3 @@
-package com.company;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,9 +10,12 @@ public class ListFiles {
 
         List<String> fileNames = new ArrayList<>();
         fileNames = listFiles.getFiles(dir, fileNames);
-
-        for(String file : fileNames) {
-            System.out.println(file);
+        if(fileNames.isEmpty()) {
+            System.out.println("No files found in directory: " + dir);
+        } else {
+            for (String file : fileNames) {
+                System.out.println(file);
+            }
         }
     }
 
@@ -29,8 +30,8 @@ public class ListFiles {
                     getFiles(file.getAbsolutePath(), fileNames);
                 }
             }
+            fileNames.sort(new SortIgnoreCase());
         }
-        fileNames.sort(new SortIgnoreCase());
         return fileNames;
     }
 
